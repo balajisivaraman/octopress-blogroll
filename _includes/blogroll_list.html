@@ -1,16 +1,14 @@
-<section class="well">
+<section>
   <h3>{{site.blogroll_name}}</h3>
-    <ul id="blogroll-list" class="nav">{% blogroll_list %}</ul>
+  <!-- IMPORTANT: Do not change the below ID as it will affect the functioning of the plugin-->
+    <ul id="blogroll-list">{% blogroll_list %}</ul>
+    {% if site.blogroll_show_latest_post %}
     <script type="text/javascript">
-      {% if site.blogroll_show_latest_post %}
-        $(document).ready(function(){
-          updateFeeds();
-          {% if site.blogroll_enable_js_sort %}
-            setTimeout(function() {$('ul#blogroll-list>li').tsort({order:'desc',attr:'age'})},{{site.blogroll_sort_timeout}});
-          {% endif %}
-        });
-      {% endif %}
+      $(document).ready(function(){
+        updateFeeds({{site.blogroll_enable_js_sort}});
+      });
     </script>
     <script src="{{ root_url }}/javascripts/tinysort-min.js"></script>
     <script src="{{ root_url }}/javascripts/blogroll.js"></script>
+    {% endif %}
 </section>

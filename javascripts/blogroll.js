@@ -19,9 +19,16 @@
  */
 
 /**
+ * Count will be used to store the number of feeds that have been processed. Once the last feed has been processed, the sorting algorithm will be called.
+ */
+var count = 0;
+var isSortEnabled = false;
+
+/**
  * Retrieves the <li> blog elements, identifies the feed URL and calls the feed update method for each one.
  */
-function updateFeeds() {
+function updateFeeds(isSort) {
+    isSortEnabled = isSort;
     var bloglist = $("#blogroll-list").children();
     $.each(bloglist, function(index, value) {
 	getLatestFeed($(this).find(':only-child').attr('feedurl'));
@@ -55,6 +62,9 @@ function addContent(feed) {
 	bloghtml = bloghtml.concat("<div style='display:block'><p style='font-weight:bold'><a href='"+entry.link+"' title='"+entry.contentSnippet+"'>");
 	bloghtml = bloghtml.concat(entry.title+"</a><br /><abbr title='last change' style='font-weight:normal;cursor: pointer;'>"+getTimeDifference(date)+"</abbr></p></div>");
 	$(itemName).after(bloghtml);
+	count++;
+        if(isSortEnabled && count == $("#blogroll-list").children().size())
+            $('ul#blogroll-list>li').tsort({order:'desc',attr:'age'});
     }
 }
 

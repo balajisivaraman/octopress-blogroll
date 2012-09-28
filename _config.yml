@@ -9,7 +9,3 @@ blogroll_show_latest_post: true
 # If the below is set to true, jquery tinysort plugin will be used to sort your feeds in order of most recent update.
 # Again, set this to false if you find your blog is slown down too much.
 blogroll_enable_js_sort: true
-# Since Google Feeds API takes time to update all the blogs in your blogroll, the above sorting should happen only after all feeds have been updated.
-# The below variable controls the time (in milliseconds) after which the sorting algorithm should be fired.
-# Note: This is applicable only if the above value is true.
-blogroll_sort_timeout: 1500
